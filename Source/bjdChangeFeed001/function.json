@@ -1,0 +1,23 @@
+{
+    "bindings": [
+      {
+        "type": "cosmosDBTrigger",
+        "name": "input",
+        "direction": "in",
+        "connectionStringSetting": "bjdcosmos001_DOCUMENTDB",
+        "databaseName": "ToDoList",
+        "collectionName": "Items",
+        "leaseCollectionName": "leases",
+        "leaseCollectionPrefix": "blob",
+        "createLeaseCollectionIfNotExists": true
+      },
+      {
+        "type": "blob",
+        "name": "output",
+        "path": "documents/{name}",
+        "connection": "bjdchangefeed001_STORAGE",
+        "direction": "out"
+      }
+    ],
+    "disabled": false
+  }
