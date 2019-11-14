@@ -39,7 +39,7 @@ jobs:
       shell: bash
       run: |
         pushd Source/bjdChangeFeed001/
-        dotnet build --configuration Release --output ./output
+        dotnet build --configuration Release --output ../../output
         popd
 
     - name: 'Run Azure Functions Action'
