@@ -4,20 +4,46 @@ on: [push]
 
 jobs:
   build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#    - uses: actions/checkout@v1
+#    - name: Setup dotnet
+#      uses: actions/setup-dotnet@v1
+#      with:
+#        dotnet-version: '2.2.103'
+#    - run: dotnet build ./Source/bjdChangeFeed001/CosmosDbChangeFeed.csproj
+#    - uses: Azure/functions-action@v1
+#      id: fa
+#      with:
+#         app-name: bjdaction001
+#         publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
+#         package: './output'
 
-    runs-on: ubuntu-latest
+   runs-on: ubuntu-latest
+   steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@master
 
-    steps:
-    - uses: actions/checkout@v1
-    - name: Setup dotnet
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Setup Dotnet 2.2.300
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '2.2.103'
-    - run: dotnet build ./Source/bjdChangeFeed001/CosmosDbChangeFeed.csproj
-    - uses: Azure/functions-action@v1
-      id: fa
-      with:
-         app-name: bjdaction001
-         publish-profile: ${{ secrets.AZURE_CREDENTIALS }}
-         package: './output'
+        dotnet-version: '2.2.300'
 
+    - name: 'Run dotnet build'
+      shell: bash
+      run: |
+        pushd Source/bjdChangeFeed001/
+        dotnet build --configuration Release --output ./output
+        popd
+
+    - name: 'Run Azure Functions Action'
+      uses: Azure/functions-action@v1
+      with:
+        app-name: bjdaction001
+        package: './output'
