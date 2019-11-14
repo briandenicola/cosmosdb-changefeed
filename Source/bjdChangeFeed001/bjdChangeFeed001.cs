@@ -1,7 +1,9 @@
 using System;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Azure.Documents;
-using Microsoft.Azure.DocumentDB.Core;
 using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
@@ -11,7 +13,7 @@ namespace ChangeFeedDemo
     public static class bjdChangeFeed001
     {
         [FunctionName("bjdChangeFeed001")]
-        public static void Run(ReadOnlyList<Document> input, Stream output, ILogger log)
+        public static void Run(IReadOnlyList<Document> input, Stream output, ILogger log)
         {
             if (input != null && input.Count > 0)
             {
