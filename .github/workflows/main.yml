@@ -23,7 +23,7 @@ jobs:
       shell: bash
       run: |
         pushd Source
-        dotnet build --configuration Release --output=./ouput
+        dotnet publish --configuration Release --output=./ouput
         popd
 
     - name: 'Run Azure Functions Action'
