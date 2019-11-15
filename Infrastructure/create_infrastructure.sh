@@ -20,15 +20,18 @@ az storage container create -n documents --account-name ${storageAccountName} --
 #Create Cosmos
 az cosmosdb create -g ${RG} -n ${cosmosDBAccountName} --kind GlobalDocumentDB 
 az cosmosdb database create  -g ${RG} -n ${cosmosDBAccountName} -d ToDoList
-az cosmosdb collection create -g ${RG} -n ${cosmosDBAccountName} -d ToDoList -c Items --partition-key-path '/_partitionKey'
-az cosmosdb collection create -g ${RG} -n ${cosmosDBAccountName} -d ToDoList -c leases --partition-key-path '/_partitionKey'
+az cosmosdb collection create -g ${RG} -n ${cosmosDBAccountName} -d ToDoList -c Items --partition-key-path '/id'
 cosmosConnectionString=`az cosmosdb list-connection-strings -n ${cosmosDBAccountName} -g $RG --query 'connectionStrings[0].connectionString' -o tsv`
+
+
+
 
 #Create Function App
 funcStorageName=${functionAppName}sa
 az storage account create --name ${funcStorageName} --location ${location} --resource-group ${RG} --sku Standard_LRS
 az functionapp create --name ${functionAppName} --storage-account ${funcStorageName} --consumption-plan-location ${location} --resource-group ${RG}
 
+#Function App Settings
 az functionapp config appsettings set -g ${RG} -n ${functionAppName} --settings bjdchangefeed001_STORAGE=${storageConnectionString}
 az functionapp config appsettings set -g ${RG} -n ${functionAppName} --settings bjdcosmos001_DOCUMENTDB=${cosmosConnectionString}
 az functionapp config appsettings set -g ${RG} -n ${functionAppName} --settings FUNCTIONS_WORKER_RUNTIME=dotnet
