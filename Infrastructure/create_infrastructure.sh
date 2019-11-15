@@ -12,7 +12,7 @@ az group create -n ${RG} -l ${location}
 #Create Storage Account 
 az storage account create --name ${storageAccountName} --location ${location} --resource-group ${RG} --sku Standard_LRS
 storageKey=`az storage account keys list -n ${storageAccountName} --query '[0].value' -o tsv`
-storageConnectionString='DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageKey}'
+storageConnectionString="DefaultEndpointsProtocol=https;AccountName=${storageAccountName};AccountKey=${storageKey}"
 
 # Create Container
 az storage container create -n documents --account-name ${storageAccountName} --account-key ${storageKey}
@@ -31,3 +31,4 @@ az functionapp create --name ${functionAppName} --storage-account ${funcStorageN
 
 az functionapp config appsettings set -g ${RG} -n ${functionAppName} --settings bjdchangefeed001_STORAGE=${storageConnectionString}
 az functionapp config appsettings set -g ${RG} -n ${functionAppName} --settings bjdcosmos001_DOCUMENTDB=${cosmosConnectionString}
+az functionapp config appsettings set -g ${RG} -n ${functionAppName} --settings FUNCTIONS_WORKER_RUNTIME=dotnet
