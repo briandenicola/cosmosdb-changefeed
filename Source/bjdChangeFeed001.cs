@@ -13,7 +13,7 @@ namespace ChangeFeedDemo
     public static class bjdChangeFeed001
     {
         [FunctionName("bjdChangeFeed001")]
-        public static void run(IReadOnlyList<Document> input, Stream output, ILogger log)
+        public static void Run(IReadOnlyList<Document> input, Stream output, ILogger log)
         {
             if (input != null && input.Count > 0)
             {

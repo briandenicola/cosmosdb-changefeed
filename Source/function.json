@@ -19,5 +19,7 @@
         "direction": "out"
       }
     ],
-    "disabled": false
+    "disabled": false,
+    "scriptFile": "./bin/bjdAction001.dll",
+    "entryPoint": "ChangeFeedDemo.bjdChangeFeed001.Run"
   }
