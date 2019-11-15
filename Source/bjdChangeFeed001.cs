@@ -22,7 +22,7 @@ namespace ChangeFeedDemo
                 CreateLeaseCollectionIfNotExists=true
             )]IReadOnlyList<Document> input, 
             [Blob(
-                "documents/{sys.randguid}", 
+                "documents/{sys.randguid}.txt", 
                 FileAccess.Write,
                 Connection="bjdchangefeed001_STORAGE"
             )] Stream output, 
