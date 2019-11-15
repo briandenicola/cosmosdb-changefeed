@@ -13,7 +13,15 @@ namespace ChangeFeedDemo
     public static class bjdChangeFeed001
     {
         [FunctionName("bjdChangeFeed001")]
-        public static void Run(IReadOnlyList<Document> input, Stream output, ILogger log)
+        public static void Run(
+            [CosmosDBTrigger(
+                "ToDoList", "Items",
+                ConnectionStringSetting="bjdcosmos001_DOCUMENTDB",
+                LeaseCollectionName="leases",
+                LeaseCollectionPrefix="blob",
+                CreateLeaseCollectionIfNotExists=true
+            )]IReadOnlyList<Document> input, 
+            Stream output, ILogger log)
         {
             if (input != null && input.Count > 0)
             {

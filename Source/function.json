@@ -1,17 +1,6 @@
 {
     "bindings": [
       {
-        "type": "cosmosDBTrigger",
-        "name": "input",
-        "direction": "in",
-        "connectionStringSetting": "bjdcosmos001_DOCUMENTDB",
-        "databaseName": "ToDoList",
-        "collectionName": "Items",
-        "leaseCollectionName": "leases",
-        "leaseCollectionPrefix": "blob",
-        "createLeaseCollectionIfNotExists": true
-      },
-      {
         "type": "blob",
         "name": "output",
         "path": "documents/{name}",
@@ -19,7 +8,5 @@
         "direction": "out"
       }
     ],
-    "disabled": false,
-    "scriptFile": "./bin/bjdAction001.dll",
-    "entryPoint": "ChangeFeedDemo.bjdChangeFeed001.Run"
+    "disabled": false
   }
