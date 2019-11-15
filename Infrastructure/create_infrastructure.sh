@@ -23,9 +23,6 @@ az cosmosdb database create  -g ${RG} -n ${cosmosDBAccountName} -d ToDoList
 az cosmosdb collection create -g ${RG} -n ${cosmosDBAccountName} -d ToDoList -c Items --partition-key-path '/id'
 cosmosConnectionString=`az cosmosdb list-connection-strings -n ${cosmosDBAccountName} -g $RG --query 'connectionStrings[0].connectionString' -o tsv`
 
-
-
-
 #Create Function App
 funcStorageName=${functionAppName}sa
 az storage account create --name ${funcStorageName} --location ${location} --resource-group ${RG} --sku Standard_LRS
