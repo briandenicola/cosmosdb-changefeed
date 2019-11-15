@@ -21,7 +21,12 @@ namespace ChangeFeedDemo
                 LeaseCollectionPrefix="blob",
                 CreateLeaseCollectionIfNotExists=true
             )]IReadOnlyList<Document> input, 
-            Stream output, ILogger log)
+            [Blob(
+                "documents/{name}", 
+                FileAccess.Write,
+                Connection="bjdchangefeed001_STORAGE"
+            )] Stream output, 
+            ILogger log)
         {
             if (input != null && input.Count > 0)
             {
