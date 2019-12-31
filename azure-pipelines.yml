@@ -2,7 +2,6 @@ trigger:
 - master
 
 variables:
-  azureSubscription: 'BJD_APP01_Subscription'
   functionAppName: '$(functionName)'
   vmImageName: 'vs2017-win2016'
   workingDirectory: '$(System.DefaultWorkingDirectory)/Source'
@@ -58,7 +57,7 @@ stages:
           - task: AzureFunctionApp@1
             displayName: 'Azure functions app deploy'
             inputs:
-              azureSubscription: '$(azureSubscription)'
+              azureSubscription: '$(subscriptionId)'
               appType: functionApp
               appName: $(functionAppName)
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
