@@ -2,7 +2,7 @@ trigger:
 - master
 
 variables:
-  azureSubscription: '15421089-60f2-4332-907d-297c294faa79'
+  azureSubscription: '$(subscriptionId)'
   functionAppName: '$(functionName)'
   vmImageName: 'vs2017-win2016'
   workingDirectory: '$(System.DefaultWorkingDirectory)/Source'
