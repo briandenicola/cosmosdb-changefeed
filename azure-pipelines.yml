@@ -2,16 +2,9 @@ trigger:
 - master
 
 variables:
-  # Azure Resource Manager connection created during pipeline creation
-  azureSubscription: '15421089-60f2-4332-907d-297c294faa79'
-
-  # Function app name
-  functionAppName: 'funcjlkuanljl001'
-
-  # Agent VM image name
+  azureSubscription: $(subscriptionId)
+  functionAppName: $(functionName)
   vmImageName: 'vs2017-win2016'
-
-  # Working Directory
   workingDirectory: '$(System.DefaultWorkingDirectory)/Source'
 
 stages:
